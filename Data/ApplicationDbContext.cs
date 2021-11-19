@@ -9,5 +9,6 @@ namespace PracticoLaboratorio4.Data
 
         public DbSet<Genero> Generos { get; set; }
         public DbSet<Director> Directores { get; set; }
+        public DbSet<Pelicula> Peliculas { get; set; }
     }
 }
