@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
+using PracticoLaboratorio4.Validators;
 
 namespace PracticoLaboratorio4.Models
 {
@@ -22,6 +23,9 @@ namespace PracticoLaboratorio4.Models
         public string UrlFoto { get; set; }
 
         [NotMapped]
+        [AllowedExtensions(".png", ".jpg", ".jpeg")]
+        [MaxFileSize(8 * 1024 * 1024)] // 8 mb
+        [MinFileSize] // 0 b
         public IFormFile Foto { get; set; }
 
         public List<Pelicula> Peliculas { get; set; }
