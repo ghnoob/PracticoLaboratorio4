@@ -8,5 +8,6 @@ namespace PracticoLaboratorio4.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options) {}
 
         public DbSet<Genero> Generos { get; set; }
+        public DbSet<Director> Directores { get; set; }
     }
 }
