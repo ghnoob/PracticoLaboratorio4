@@ -448,3 +448,6 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 *.db
+
+wwwroot/img/directores/*
+!wwwroot/img/directores/.gitkeep
