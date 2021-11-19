@@ -1,0 +1,61 @@
+@model PracticoLaboratorio4.Models.Director
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Director</h4>
+    <hr />
+    @{
+        if (!string.IsNullOrEmpty(Model.UrlFoto)){
+            <div class="foto-director">
+                <img
+                    src="@Model.UrlFoto"
+                    alt="foto del director"
+                    class="img-fluid img-thumbnail"
+                >
+            </div>
+        }
+    }
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Biografia)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Biografia)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h5>Películas disponibles de este director</h5>
+    @{
+        if(Model.Peliculas.Any())
+        {
+            <ul>
+                @foreach (Pelicula pelicula in Model.Peliculas)
+                {
+                    <li>
+                        @($"{pelicula.Titulo}({pelicula.FechaEstreno.Year})")
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Todavía no hay películas de este director en nuestra base de datos.</p>
+        }
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
+    <a asp-action="Index">Volver a la lista</a>
+</div>
