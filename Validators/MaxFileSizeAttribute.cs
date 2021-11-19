@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 
-namespace FinalLaboratorio4.Validators
+namespace PracticoLaboratorio4.Validators
 {
     public class MaxFileSizeAttribute : ValidationAttribute
     {

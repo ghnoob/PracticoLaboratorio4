@@ -1,7 +1,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Http;
 
-namespace FinalLaboratorio4.Helpers
+namespace PracticoLaboratorio4.Utils
 {
     public static class FileManager
     {
