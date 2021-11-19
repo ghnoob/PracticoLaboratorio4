@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
@@ -22,5 +23,7 @@ namespace PracticoLaboratorio4.Models
 
         [NotMapped]
         public IFormFile Foto { get; set; }
+
+        public List<Pelicula> Peliculas { get; set; }
     }
 }
