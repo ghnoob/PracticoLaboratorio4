@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,5 +13,7 @@ namespace PracticoLaboratorio4.Models
         [MaxLength(20)]
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }
+
+        public List<Pelicula> Peliculas { get; set; }
     }
 }
