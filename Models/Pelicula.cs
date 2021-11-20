@@ -33,6 +33,7 @@ namespace PracticoLaboratorio4.Models
 
         [Required]
         [DisplayName("Fecha de estreno")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime FechaEstreno { get; set; }
 
         [MaxLength(1000)]
