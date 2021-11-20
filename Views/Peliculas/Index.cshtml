@@ -1,0 +1,96 @@
+@model PaginatedList<PracticoLaboratorio4.Models.Pelicula>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Películas</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Portada
+            </th>
+            <th>
+                Titulo
+            </th>
+            <th>
+                Genero
+            </th>
+            <th>
+                Director
+            </th>
+            <th>
+                Fecha de estreno
+            </th>
+            <th>
+                Trailer
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @{
+                    if (!string.IsNullOrEmpty(item.UrlImagenPortada))
+                    {
+                        <div class="foto-pelicula">
+                            <img src="@item.UrlImagenPortada" alt="portada" class="img-fluid img-thumbail">
+                        </div>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                <a asp-controller="Generos" asp-action="Details" asp-route-id="@item.GeneroId">
+                    @Html.DisplayFor(modelItem => item.Genero.Descripcion)
+                </a>
+            </td>
+            <td>
+                <a asp-controller="Directores" asp-action="Details" asp-route-id="@item.DirectorId">
+                    @Html.DisplayFor(modelItem => item.Director.Nombre)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEstreno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trailer)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Siguiente
+</a>
