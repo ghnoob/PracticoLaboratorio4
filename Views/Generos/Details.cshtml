@@ -28,7 +28,14 @@
                 @foreach (Pelicula pelicula in Model.Peliculas)
                 {
                     <li>
-                        @($"{pelicula.Titulo}({pelicula.FechaEstreno.Year}), de {pelicula.Director.Nombre}")
+                        @(pelicula.Titulo) (@(pelicula.FechaEstreno.Year)), de
+                        <a
+                            asp-controller="Directores"
+                            asp-action="Details"
+                            asp-route-id="@pelicula.DirectorId"
+                        >
+                            @pelicula.Director.Nombre
+                        </a>
                     </li>
                 }
             </ul>
