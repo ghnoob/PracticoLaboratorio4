@@ -73,3 +73,7 @@ body {
 .foto-director {
   max-width: 200px;
 }
+
+.foto-pelicula {
+  max-width: 270px;
+}
