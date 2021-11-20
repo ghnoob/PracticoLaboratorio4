@@ -22,7 +22,7 @@ namespace PracticoLaboratorio4.Controllers
         // GET: Generos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Generos.ToListAsync());
+            return View(await _context.Generos.AsNoTracking().OrderBy(g => g.Descripcion).ToListAsync());
         }
 
         // GET: Generos/Details/5
