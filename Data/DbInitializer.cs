@@ -49,7 +49,7 @@ namespace PracticoLaboratorio4.Data
 
             Faker<Pelicula> testPelicula = new Faker<Pelicula>("es")
                 .RuleFor(p => p.Id, f => peliculaId++)
-                .RuleFor(p => p.Titulo, f => f.Lorem.Sentence())
+                .RuleFor(p => p.Titulo, f => f.Lorem.Word())
                 .RuleFor(p => p.Genero, f => f.PickRandom(generos))
                 .RuleFor(p => p.Director, f => f.PickRandom(directores))
                 .RuleFor(p => p.Resumen, f => f.Lorem.Paragraphs())
