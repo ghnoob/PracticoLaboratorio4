@@ -104,7 +104,7 @@ namespace PracticoLaboratorio4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Biografia,Foto")] Director director)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Biografia,Foto,UrlFoto")] Director director)
         {
             if (id != director.Id)
             {
@@ -115,7 +115,10 @@ namespace PracticoLaboratorio4.Controllers
             {
                 if (director.Foto != null)
                 {
-                    FileManager.Delete(Path.Combine(_env.WebRootPath, director.UrlFoto));
+                    if (!string.IsNullOrEmpty(director.UrlFoto))
+                    {
+                        FileManager.Delete(Path.Combine(_env.WebRootPath, director.UrlFoto.TrimStart('/')));
+                    }
 
                     director.UrlFoto = "/" + Path.GetRelativePath(
                         _env.WebRootPath,
@@ -174,7 +177,7 @@ namespace PracticoLaboratorio4.Controllers
 
             if (!string.IsNullOrEmpty(director.UrlFoto))
             {
-                FileManager.Delete(Path.Combine(_env.WebRootPath, director.UrlFoto));
+                FileManager.Delete(Path.Combine(_env.WebRootPath, director.UrlFoto.TrimStart('/')));
             }
 
             _context.Directores.Remove(director);
