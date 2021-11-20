@@ -13,6 +13,14 @@ namespace PracticoLaboratorio4.Data
                 .Property(g => g.Descripcion)
                 .HasColumnType("TEXT COLLATE NOCASE");
 
+            modelBuilder.Entity<Director>()
+                .Property(d => d.Nombre)
+                .HasColumnType("TEXT COLLATE NOCASE");
+
+            modelBuilder.Entity<Pelicula>()
+                .Property(p => p.Titulo)
+                .HasColumnType("TEXT COLLATE NOCASE");
+
             modelBuilder.Entity<Genero>()
                 .HasIndex(g => g.Descripcion)
                 .IsUnique();
