@@ -44,7 +44,9 @@
                 @foreach (Pelicula pelicula in Model.Peliculas)
                 {
                     <li>
-                        @($"{pelicula.Titulo}({pelicula.FechaEstreno.Year})")
+                        <a asp-controller="Peliculas" asp-action="Details" asp-route-id="@pelicula.Id">
+                            @($"{pelicula.Titulo}({pelicula.FechaEstreno.Year})")
+                        </a>
                     </li>
                 }
             </ul>
