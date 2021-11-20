@@ -451,3 +451,6 @@ $RECYCLE.BIN/
 
 wwwroot/img/directores/*
 !wwwroot/img/directores/.gitkeep
+
+wwwroot/img/peliculas/*
+!wwwroot/img/peliculas/.gitkeep
