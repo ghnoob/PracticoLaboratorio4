@@ -36,7 +36,7 @@ namespace PracticoLaboratorio4.Data
             Faker<Director> testDirector = new Faker<Director>("es")
                 .RuleFor(d => d.Id, f => directorId++)
                 .RuleFor(d => d.Nombre, f => f.Name.FullName())
-                .RuleFor(d => d.Biografia, f => f.Lorem.Paragraphs())
+                .RuleFor(d => d.Biografia, f => f.Lorem.Paragraph())
                 .RuleFor(d => d.UrlFoto, f => f.Image.PicsumUrl(200, 200));
 
             Director[] directores = testDirector.GenerateLazy(30).ToArray();
@@ -52,7 +52,7 @@ namespace PracticoLaboratorio4.Data
                 .RuleFor(p => p.Titulo, f => f.Lorem.Word())
                 .RuleFor(p => p.Genero, f => f.PickRandom(generos))
                 .RuleFor(p => p.Director, f => f.PickRandom(directores))
-                .RuleFor(p => p.Resumen, f => f.Lorem.Paragraphs())
+                .RuleFor(p => p.Resumen, f => f.Lorem.Paragraph())
                 .RuleFor(p => p.FechaEstreno, f => f.Date.Past(50))
                 .RuleFor(p => p.UrlImagenPortada, f => f.Image.PicsumUrl(270, 400))
                 .RuleFor(p => p.Trailer, f => f.Internet.UrlWithPath("https", "youtube.com"));
