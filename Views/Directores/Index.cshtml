@@ -16,7 +16,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            <td class="foto-director">
+            <td>
+                <div class="foto-director">
                 @{
                     if (!string.IsNullOrEmpty(item.UrlFoto))
                     {
@@ -27,6 +28,7 @@
                         >
                     }
                 }
+                </div>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
