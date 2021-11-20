@@ -17,12 +17,14 @@ namespace PracticoLaboratorio4.Models
         public string Titulo { get; set; }
 
         [Required]
+        [DisplayName("Género")]
         public int GeneroId { get; set; }
 
         [DisplayName("Género")]
         public Genero Genero { get; set; }
 
         [Required]
+        [DisplayName("Director")]
         public int DirectorId { get; set; }
 
         public Director Director { get; set; }
