@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel;
+using PracticoLaboratorio4.Validators;
 
 namespace PracticoLaboratorio4.Models
 {
@@ -43,6 +44,9 @@ namespace PracticoLaboratorio4.Models
 
         [NotMapped]
         [DisplayName("Portada")]
+        [MinFileSize]
+        [MaxFileSize(8 * 1024 * 1024)]
+        [AllowedExtensions(".jpg", ".jpeg", ".png")]
         public IFormFile ImagenPortada { get; set; }
 
         [Url]
