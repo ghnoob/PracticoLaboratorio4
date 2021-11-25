@@ -13,7 +13,6 @@ namespace PracticoLaboratorio4.Controllers
     public class DirectoresController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
 
         private const string ImagePathWeb = "/img/directores/";
         private readonly string imagePathServer;
@@ -21,7 +20,6 @@ namespace PracticoLaboratorio4.Controllers
         public DirectoresController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
-            _env = env;
 
             imagePathServer = Path.Combine(env.WebRootPath, "img", "directores");
         }
@@ -116,12 +114,7 @@ namespace PracticoLaboratorio4.Controllers
                 {
                     if (!string.IsNullOrEmpty(director.UrlFoto))
                     {
-                        FileManager.Delete(
-                            Path.Combine(
-                                _env.WebRootPath,
-                                director.UrlFoto.TrimStart('/').Replace('/', Path.DirectorySeparatorChar)
-                            )
-                        );
+                        FileManager.Delete(Path.Combine(imagePathServer, director.UrlFoto.Split('/').Last()));
                     }
 
                     director.UrlFoto = ImagePathWeb + FileManager.Create(director.Foto, imagePathServer);
@@ -175,12 +168,7 @@ namespace PracticoLaboratorio4.Controllers
 
             if (!string.IsNullOrEmpty(director.UrlFoto))
             {
-                FileManager.Delete(
-                    Path.Combine(
-                        _env.WebRootPath,
-                        director.UrlFoto.TrimStart('/').Replace('/', Path.DirectorySeparatorChar)
-                    )
-                );
+                FileManager.Delete(Path.Combine(imagePathServer, director.UrlFoto.Split('/').Last()));
             }
 
             _context.Directores.Remove(director);

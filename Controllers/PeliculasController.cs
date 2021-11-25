@@ -14,7 +14,6 @@ namespace PracticoLaboratorio4.Controllers
     public class PeliculasController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _env;
 
         private const string ImagePathWeb = "/img/peliculas/";
         private readonly string imagePathServer;
@@ -22,7 +21,6 @@ namespace PracticoLaboratorio4.Controllers
         public PeliculasController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
-            _env = env;
 
             imagePathServer = Path.Combine(env.WebRootPath, "img", "peliculas");
         }
@@ -161,8 +159,7 @@ namespace PracticoLaboratorio4.Controllers
                 {
                     if (!string.IsNullOrEmpty(pelicula.UrlImagenPortada))
                     {
-                        string url = pelicula.UrlImagenPortada.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                        FileManager.Delete(Path.Combine(_env.WebRootPath, url));
+                        FileManager.Delete(Path.Combine(imagePathServer, pelicula.UrlImagenPortada.Split('/').Last()));
                     }
 
                     pelicula.UrlImagenPortada = ImagePathWeb + FileManager.Create(pelicula.ImagenPortada, imagePathServer);
@@ -231,8 +228,7 @@ namespace PracticoLaboratorio4.Controllers
 
             if (!string.IsNullOrEmpty(pelicula.UrlImagenPortada))
             {
-                string url = pelicula.UrlImagenPortada.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
-                FileManager.Delete(Path.Combine(_env.WebRootPath, url));
+                FileManager.Delete(Path.Combine(imagePathServer, pelicula.UrlImagenPortada.Split('/').Last()));
             }
 
             _context.Peliculas.Remove(pelicula);
