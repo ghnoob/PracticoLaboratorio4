@@ -16,10 +16,15 @@ namespace PracticoLaboratorio4.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
+        private const string ImagePathWeb = "/img/peliculas/";
+        private readonly string imagePathServer;
+
         public PeliculasController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
+
+            imagePathServer = Path.Combine(env.WebRootPath, "img", "peliculas");
         }
 
         // GET: Peliculas
@@ -86,13 +91,7 @@ namespace PracticoLaboratorio4.Controllers
             {
                 if (pelicula.ImagenPortada != null)
                 {
-                    pelicula.UrlImagenPortada = "/" + Path.GetRelativePath(
-                        _env.WebRootPath,
-                        FileManager.Create(
-                            pelicula.ImagenPortada,
-                            Path.Combine(_env.WebRootPath, "img", "peliculas")
-                        )
-                    );
+                    pelicula.UrlImagenPortada = ImagePathWeb + FileManager.Create(pelicula.ImagenPortada, imagePathServer);
                 }
 
                 _context.Add(pelicula);
@@ -162,17 +161,11 @@ namespace PracticoLaboratorio4.Controllers
                 {
                     if (!string.IsNullOrEmpty(pelicula.UrlImagenPortada))
                     {
-                        string url = pelicula.UrlImagenPortada.TrimStart('/');
+                        string url = pelicula.UrlImagenPortada.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
                         FileManager.Delete(Path.Combine(_env.WebRootPath, url));
                     }
 
-                    pelicula.UrlImagenPortada = "/" + Path.GetRelativePath(
-                        _env.WebRootPath,
-                        FileManager.Create(
-                            pelicula.ImagenPortada,
-                            Path.Combine(_env.WebRootPath, "img", "peliculas")
-                        )
-                    );
+                    pelicula.UrlImagenPortada = ImagePathWeb + FileManager.Create(pelicula.ImagenPortada, imagePathServer);
                 }
 
                 try
@@ -238,7 +231,8 @@ namespace PracticoLaboratorio4.Controllers
 
             if (!string.IsNullOrEmpty(pelicula.UrlImagenPortada))
             {
-                FileManager.Delete(Path.Combine(_env.WebRootPath, pelicula.UrlImagenPortada.TrimStart('/')));
+                string url = pelicula.UrlImagenPortada.TrimStart('/').Replace('/', Path.DirectorySeparatorChar);
+                FileManager.Delete(Path.Combine(_env.WebRootPath, url));
             }
 
             _context.Peliculas.Remove(pelicula);

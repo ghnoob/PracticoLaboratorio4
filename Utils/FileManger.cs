@@ -15,7 +15,7 @@ namespace PracticoLaboratorio4.Utils
                 file.CopyToAsync(fs);
             }
 
-            return outputPath;
+            return outputFileName;
         }
 
         public static void Delete(string path)
