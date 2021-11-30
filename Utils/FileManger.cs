@@ -12,7 +12,7 @@ namespace PracticoLaboratorio4.Utils
 
             using (FileStream fs = new(outputPath, FileMode.Create))
             {
-                file.CopyToAsync(fs);
+                file.CopyTo(fs);
             }
 
             return outputFileName;
